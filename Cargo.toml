@@ -1,0 +1,22 @@
+[package]
+name = "portfolio"
+version = "0.1.0"
+edition = "2021"
+authors = ["Jorge Alejandro Jiménez Luna <jorgeajimenezl17@gmail.com>"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+eframe = "0.23.0"
+log = "0.4.20"
+wasm-bindgen-futures = "0.4.37"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[profile.release]
+opt-level = 2 # fast and small wasm
+
+# Optimize all dependencies even in debug builds:
+[profile.dev.package."*"]
+opt-level = 2
