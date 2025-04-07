@@ -23,6 +23,7 @@ const commandDescriptions: Record<string, string> = {
   exit: 'Displays a message to close the tab.',
   banner: 'Displays the application banner.',
   experience: 'Displays the work experience of the user.',
+  education: 'Displays the educational background of the user.',
   contact: 'Displays the contact information of the user.',
   about: 'Displays information about the user.',
   cv: 'Downloads the user\'s CV.',
