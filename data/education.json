@@ -1,14 +1,18 @@
 [
   {
-    "degree": "M.Sc. in Computer Science",
+    "degree": "Master's",
+    "field": "Computer Science",
     "institution": "Harbour.Space University",
     "location": "Barcelona, Spain",
-    "dates": "03/2024 - Present"
+    "startDate": "03/2024",
+    "endDate": "Present"
   },
   {
-    "degree": "B.S. in Computer Science",
+    "degree": "Bachelor's",
+    "field": "Computer Science",
     "institution": "Universidad de Oriente",
     "location": "Santiago de Cuba, Cuba",
-    "dates": "09/2019 - 12/2023"
+    "startDate": "09/2019",
+    "endDate": "12/2023"
   }
 ]

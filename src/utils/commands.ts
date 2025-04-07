@@ -4,6 +4,7 @@ import { history } from '../stores/history';
 import { theme } from '../stores/theme';
 import { bold, hyperlink } from '../utils/ascii';
 
+import education from '../../data/education.json';
 import experience from '../../data/experience.json';
 
 const hostname = window.location.hostname;
@@ -52,6 +53,16 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
   cv: () => {
     window.open('cv.pdf');
     return `Downloading CV...`;
+  },
+  education: () => {
+    return education
+      .map((edu) => {
+        const header = `${bold(edu.degree)} in ${edu.field}\n  Institution: ${
+          edu.institution
+        } (${edu.location}) | ${edu.startDate} to ${edu.endDate}`;
+        return `- ${header}`;
+      })
+      .join(`\n`);
   },
   about: () => {
     return (
