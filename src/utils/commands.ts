@@ -2,6 +2,9 @@ import packageJson from '../../package.json';
 import themes from '../../themes.json';
 import { history } from '../stores/history';
 import { theme } from '../stores/theme';
+import { bold, underline } from '../utils/ascii';
+
+import experience from '../../data/experience.json';
 
 const hostname = window.location.hostname;
 
@@ -21,11 +24,24 @@ const commandDescriptions: Record<string, string> = {
 };
 
 export const commands: Record<string, (args: string[]) => Promise<string> | string> = {
+  experience: () => {
+    return experience
+      .map((exp) => {
+        const header = `${bold(exp.title)} at ${exp.company}\nLocation: ${
+          exp.location
+        } | ${exp.startDate} to ${exp.endDate}`;
+        const description = exp.description
+          .map((line) => `  • ${line}`)
+          .join("\n");
+        return `${header}\n\nDescription:\n${description}`;
+      })
+      .join(`\n\n`);
+  },
   help: () => {
     return (
       'Available commands:\n' +
       Object.keys(commands)
-        .map((cmd) => `\t${cmd}: ${commandDescriptions[cmd] ?? ''}`)
+        .map((cmd) => `\t${cmd}: ${commandDescriptions[cmd]}`)
         .join('\n')
     );
   },
