@@ -1,4 +1,4 @@
-function colorize(
+export function colorize(
   text: string,
   color: "red" | "green" | "yellow" | "blue" | "magenta" | "cyan"
 ): string {
@@ -14,20 +14,29 @@ function colorize(
   return `${colors[color]}${text}${reset}`;
 }
 
-function bold(text: string): string {
+export function bold(text: string): string {
   return `\x1b[1m${text}\x1b[22m`;
 }
-function italic(text: string): string {
+
+export function italic(text: string): string {
   return `\x1b[3m${text}\x1b[23m`;
 }
-function underline(text: string): string {
+
+export function underline(text: string): string {
   return `\x1b[4m${text}\x1b[24m`;
 }
-function strikethrough(text: string): string {
+
+export function strikethrough(text: string): string {
   return `\x1b[9m${text}\x1b[29m`;
 }
-function inverse(text: string): string {
+
+export function inverse(text: string): string {
   return `\x1b[7m${text}\x1b[27m`;
 }
 
-export { colorize, bold, italic, underline, strikethrough, inverse };
+export function hyperlink(
+  url: string,
+  text: string = url,
+): string {
+  return `\x1b]8;;${url}\x1b\\${text}\x1b]8;;\x1b\\`;
+}
