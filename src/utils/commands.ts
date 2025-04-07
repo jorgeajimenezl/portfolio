@@ -22,8 +22,8 @@ const commandDescriptions: Record<string, string> = {
   exit: 'Displays a message to close the tab.',
   banner: 'Displays the application banner.',
   experience: 'Displays the work experience of the user.',
+  contact: 'Displays the contact information of the user.',
   about: 'Displays information about the user.',
-  resume: 'Downloads the user\'s resume.',
   cv: 'Downloads the user\'s CV.',
 };
 
@@ -48,6 +48,10 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
       `GitHub: ${hyperlink(packageJson.author.github)}\n` +
       `LinkedIn: ${hyperlink(packageJson.author.linkedin)}\n`
     );
+  },
+  cv: () => {
+    window.open('cv.pdf');
+    return `Downloading CV...`;
   },
   about: () => {
     return (
