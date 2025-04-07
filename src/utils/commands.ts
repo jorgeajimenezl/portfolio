@@ -25,7 +25,7 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
     return (
       'Available commands:\n' +
       Object.keys(commands)
-        .map((cmd) => `\t${cmd}: ${commandDescriptions[cmd]}`)
+        .map((cmd) => `\t${cmd}: ${commandDescriptions[cmd] ?? ''}`)
         .join('\n')
     );
   },
