@@ -2,7 +2,7 @@ import packageJson from '../../package.json';
 import themes from '../../themes.json';
 import { history } from '../stores/history';
 import { theme } from '../stores/theme';
-import { bold, underline } from '../utils/ascii';
+import { bold, hyperlink } from '../utils/ascii';
 
 import experience from '../../data/experience.json';
 
@@ -21,6 +21,10 @@ const commandDescriptions: Record<string, string> = {
   email: 'Opens the default mail client to send an email.',
   exit: 'Displays a message to close the tab.',
   banner: 'Displays the application banner.',
+  experience: 'Displays the work experience of the user.',
+  about: 'Displays information about the user.',
+  resume: 'Downloads the user\'s resume.',
+  cv: 'Downloads the user\'s CV.',
 };
 
 export const commands: Record<string, (args: string[]) => Promise<string> | string> = {
@@ -37,11 +41,24 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
       })
       .join(`\n\n`);
   },
+  contact: () => {
+    return (
+      `You can reach me at:\n` +
+      `Email: ${packageJson.author.email}\n` +
+      `GitHub: ${hyperlink(packageJson.author.github)}\n` +
+      `LinkedIn: ${hyperlink(packageJson.author.linkedin)}\n`
+    );
+  },
+  about: () => {
+    return (
+      `Software engineer with a strong background in backend development, problem-solving, and system optimization. Passionate about open-source technologies, Linux, and competitive programming. Experienced in building efficient and scalable backend solutions, working with databases, and designing APIs. Always eager to learn and apply new technologies, especially in AI and software architecture. Enjoys collaborating in team environments and exploring game and graphics development as a hobby.`
+    );
+  },
   help: () => {
     return (
       'Available commands:\n' +
       Object.keys(commands)
-        .map((cmd) => `\t${cmd}: ${commandDescriptions[cmd]}`)
+        .map((cmd) => `\t${cmd}: ${commandDescriptions[cmd] ?? ''}`)
         .join('\n')
     );
   },
