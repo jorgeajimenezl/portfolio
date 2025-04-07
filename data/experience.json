@@ -3,8 +3,8 @@
         "title": "Software Engineer",
         "company": "Dynamico AI",
         "location": "Remote",
-        "startDate": "2024-02",
-        "endDate": "2025-02",
+        "startDate": "02/2024",
+        "endDate": "02/2025",
         "description": [
             "Engineered efficient backend solutions to optimize chat with LLM models, improving response times and system reliability.",
             "Integrated monitoring and logging tools to analyze model behavior, ensuring robustness and identifying areas for optimization.",
@@ -15,8 +15,8 @@
         "title": "Backend Developer (.NET)",
         "company": "Streaming Cuba",
         "location": "Santiago de Cuba, Cuba",
-        "startDate": "2020-05",
-        "endDate": "2021-02",
+        "startDate": "05/2020",
+        "endDate": "02/2021",
         "description": [
             "Architected and deployed a high-performance REST API to manage the Streaming Cuba event system, supporting real-time content distribution.",
             "Optimized SQL queries leading to a 30% reduction in latency.",
