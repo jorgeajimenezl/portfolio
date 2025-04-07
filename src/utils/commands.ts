@@ -5,8 +5,30 @@ import { theme } from '../stores/theme';
 
 const hostname = window.location.hostname;
 
+const commandDescriptions: Record<string, string> = {
+  help: 'Displays the list of available commands.',
+  hostname: 'Shows the hostname of the current machine.',
+  whoami: 'Displays the current user.',
+  date: 'Shows the current date and time.',
+  echo: 'Echoes the input arguments.',
+  sudo: 'Attempts to run a command as root (for fun).',
+  light: 'Switches the theme to light mode.',
+  dark: 'Switches the theme to dark mode.',
+  clear: 'Clears the command history.',
+  email: 'Opens the default mail client to send an email.',
+  exit: 'Displays a message to close the tab.',
+  banner: 'Displays the application banner.',
+};
+
 export const commands: Record<string, (args: string[]) => Promise<string> | string> = {
-  help: () => 'Available commands:\n' + Object.keys(commands).join('\n'),
+  help: () => {
+    return (
+      'Available commands:\n' +
+      Object.keys(commands)
+        .map((cmd) => `\t${cmd}: ${commandDescriptions[cmd]}`)
+        .join('\n')
+    );
+  },
   hostname: () => hostname,
   whoami: () => 'guest',
   date: () => new Date().toLocaleString(),
