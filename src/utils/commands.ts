@@ -79,6 +79,36 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
       })
       .join(`\n\n`);
   },
+  ls: () => {
+    return (
+      `cv.pdf\n` +
+      `README.md\n` +
+      `skills.json\n` +
+      `education.json\n` +
+      `experience.json\n`
+    );
+  },
+  cat: (args: string[]) => {
+    const fileName = args[0];
+    switch (fileName) {
+      case 'README.md':
+        return (
+          `# Welcome to my terminal!\n` +
+          `This is a simple terminal interface to showcase my portfolio.\n` +
+          `You can use the 'help' command to see the list of available commands.\n`
+        );
+      case 'skills.json':
+        return JSON.stringify(skills, null, 2);
+      case 'education.json':
+        return JSON.stringify(education, null, 2);
+      case 'experience.json':
+        return JSON.stringify(experience, null, 2);
+      case 'cv.pdf':
+        return commands.cv(args);
+      default:
+        return `cat: ${fileName}: No such file or directory`;
+    }
+  },
   about: () => {
     return (
       `Software engineer with a strong background in backend development, problem-solving, and system optimization. Passionate about open-source technologies, Linux, and competitive programming. Experienced in building efficient and scalable backend solutions, working with databases, and designing APIs. Always eager to learn and apply new technologies, especially in AI and software architecture. Enjoys collaborating in team environments and exploring game and graphics development as a hobby.`
