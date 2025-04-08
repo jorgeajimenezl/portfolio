@@ -24,6 +24,8 @@ const commandDescriptions: Record<string, string> = {
   email: 'Opens the default mail client to send an email.',
   exit: 'Displays a message to close the tab.',
   banner: 'Displays the application banner.',
+  ls: 'Lists the files in the current directory.',
+  cat: 'Displays the content of a file.',
 
   // Personal commands
   experience: 'Displays the work experience of the user.',
