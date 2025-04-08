@@ -6,10 +6,12 @@ import { bold, hyperlink } from '../utils/ascii';
 
 import education from '../../data/education.json';
 import experience from '../../data/experience.json';
+import skills from '../../data/skills.json';
 
 const hostname = window.location.hostname;
 
 const commandDescriptions: Record<string, string> = {
+  // System commands
   help: 'Displays the list of available commands.',
   hostname: 'Shows the hostname of the current machine.',
   whoami: 'Displays the current user.',
@@ -22,11 +24,14 @@ const commandDescriptions: Record<string, string> = {
   email: 'Opens the default mail client to send an email.',
   exit: 'Displays a message to close the tab.',
   banner: 'Displays the application banner.',
+
+  // Personal commands
   experience: 'Displays the work experience of the user.',
   education: 'Displays the educational background of the user.',
   contact: 'Displays the contact information of the user.',
   about: 'Displays information about the user.',
   cv: 'Downloads the user\'s CV.',
+  skills: 'Displays the skills of the user.',
 };
 
 export const commands: Record<string, (args: string[]) => Promise<string> | string> = {
@@ -64,6 +69,15 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
         return `- ${header}`;
       })
       .join(`\n`);
+  },
+  skills: () => {
+    return skills
+      .map((skill) => {
+        const header = `${bold(skill.category)}`
+        const skillsList = skill.items.map((item) => `  • ${item}`).join('\n');
+        return `${header}\n\n${skillsList}`;
+      })
+      .join(`\n\n`);
   },
   about: () => {
     return (

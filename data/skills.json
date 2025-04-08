@@ -1,0 +1,18 @@
+[
+  {
+    "category": "Programming Languages",
+    "items": ["Python", "C/C++", "C#", "Rust", "Java", "JavaScript"]
+  },
+  {
+    "category": "Frameworks",
+    "items": ["FastAPI", "Flask", "Django", ".NET Core", "Entity Framework"]
+  },
+  {
+    "category": "Databases",
+    "items": ["MySQL", "PostgreSQL", "Redis", "MongoDB"]
+  },
+  {
+    "category": "DevOps & Tools",
+    "items": ["Docker", "Git", "Unix/Linux"]
+  }
+]
