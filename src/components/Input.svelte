@@ -7,6 +7,9 @@
 
   let command = '';
   let historyIndex = -1;
+  let autoCompleteOptions: string[] = [];
+  let autoCompleteIndex = -1;
+  let commandPrefix = '';
 
   let input: HTMLInputElement;
 
@@ -28,7 +31,18 @@
     input.scrollIntoView({ behavior: 'smooth', block: 'end' });
   });
 
+  function findMatchingCommands(prefix: string): string[] {
+    if (!prefix) return [];
+    return Object.keys(commands).filter((cmd) => cmd.startsWith(prefix));
+  }
+
   const handleKeyDown = async (event: KeyboardEvent) => {
+    if (event.key !== 'Tab' && autoCompleteIndex !== -1) {
+      autoCompleteOptions = [];
+      autoCompleteIndex = -1;
+      commandPrefix = '';
+    }
+    
     if (event.key === 'Enter') {
       const [commandName, ...args] = command.split(' ');
 
@@ -51,6 +65,8 @@
       }
 
       command = '';
+      autoCompleteOptions = [];
+      autoCompleteIndex = -1;
     } else if (event.key === 'ArrowUp') {
       if (historyIndex < $history.length - 1) {
         historyIndex++;
@@ -70,13 +86,21 @@
       event.preventDefault();
     } else if (event.key === 'Tab') {
       event.preventDefault();
-
-      const autoCompleteCommand = Object.keys(commands).find((cmd) =>
-        cmd.startsWith(command),
-      );
-
-      if (autoCompleteCommand) {
-        command = autoCompleteCommand;
+      
+      if (autoCompleteIndex === -1) {
+        commandPrefix = command;
+        autoCompleteOptions = findMatchingCommands(commandPrefix);
+        
+        if (autoCompleteOptions.length > 0) {
+          autoCompleteIndex = 0;
+          command = autoCompleteOptions[autoCompleteIndex];
+        }
+      } 
+      else {
+        if (autoCompleteOptions.length > 0) {
+          autoCompleteIndex = (autoCompleteIndex + 1) % autoCompleteOptions.length;
+          command = autoCompleteOptions[autoCompleteIndex];
+        }
       }
     } else if (event.ctrlKey && event.key === 'l') {
       event.preventDefault();
