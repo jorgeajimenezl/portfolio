@@ -1,7 +1,7 @@
 import packageJson from '../../package.json';
 import themes from '../../themes.json';
 import { history } from '../stores/history';
-import { theme } from '../stores/theme';
+import { theme, autoTheme } from '../stores/theme';
 import { bold, hyperlink } from '../utils/ascii';
 
 import education from '../../data/education.json';
@@ -20,6 +20,7 @@ const commandDescriptions: Record<string, string> = {
   sudo: 'Attempts to run a command as root (for fun).',
   light: 'Switches the theme to light mode.',
   dark: 'Switches the theme to dark mode.',
+  'auto-theme': 'Automatically sets the theme based on the system preference.',
   clear: 'Clears the command history.',
   email: 'Opens the default mail client to send an email.',
   exit: 'Displays a message to close the tab.',
@@ -134,14 +135,23 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
     return `Permission denied: unable to run the command '${args[0]}' as root.`;
   },
   light: () => {
+    autoTheme.set(false);
     const t = themes.find((t) => t.name === 'light');
     theme.set(t ?? themes[0]);
     return 'Theme set to light';
   },
   dark: () => {
+    autoTheme.set(false);
     const t = themes.find((t) => t.name === 'dark');
     theme.set(t ?? themes[0]);
     return 'Theme set to dark';
+  },
+  'auto-theme': () => {
+    autoTheme.set(true);
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const selected = themes.find((t) => t.name === (isDark ? 'dark' : 'light'));
+    theme.set(selected ?? themes[0]);
+    return `Theme set to ${isDark ? 'dark' : 'light'} based on system preference (auto mode enabled)`;
   },
   clear: () => {
     history.set([]);
